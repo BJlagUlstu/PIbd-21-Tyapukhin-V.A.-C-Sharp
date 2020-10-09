@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WindowsFormsMonorail
 {
-    enum Direction
+    public enum Direction
     {
         Up,
 
