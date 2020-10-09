@@ -10,14 +10,14 @@ using System.Windows.Forms;
 
 namespace WindowsFormsMonorail
 {
-    public partial class FormMonorail : Form
-    {
-        private Monorail monorail;
+	public partial class FormMonorail : Form
+	{
+		private ITransport monorail;
 
-        public FormMonorail()
-        {
-            InitializeComponent();
-        }
+		public FormMonorail()
+		{
+			InitializeComponent();
+		}
 
 		private void Draw()
 		{
@@ -30,7 +30,16 @@ namespace WindowsFormsMonorail
 		private void buttonCreate_Click(object sender, EventArgs e)
 		{
 			Random rnd = new Random();
-			monorail = new Monorail(rnd.Next(150, 300), rnd.Next(1500, 2000), Color.White,
+			monorail = new Train(rnd.Next(150, 300), rnd.Next(1500, 2000), Color.White);
+			monorail.SetPosition(rnd.Next(50, 100), rnd.Next(50, 100), pictureBoxMonorail.Width,
+		   pictureBoxMonorail.Height);
+			Draw();
+		}
+
+		private void buttonCreateMonorail_Click(object sender, EventArgs e)
+		{
+			Random rnd = new Random();
+			monorail = new Monorail(rnd.Next(100, 300), rnd.Next(1000, 2000), Color.White,
 		   Color.Blue, true, true, true);
 			monorail.SetPosition(rnd.Next(50, 100), rnd.Next(50, 100), pictureBoxMonorail.Width,
 		   pictureBoxMonorail.Height);

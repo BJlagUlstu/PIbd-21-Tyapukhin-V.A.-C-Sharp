@@ -28,24 +28,25 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.buttonCreate = new System.Windows.Forms.Button();
+            this.buttonCreateTrain = new System.Windows.Forms.Button();
             this.buttonLeft = new System.Windows.Forms.Button();
             this.buttonDown = new System.Windows.Forms.Button();
             this.buttonRight = new System.Windows.Forms.Button();
             this.buttonUp = new System.Windows.Forms.Button();
             this.pictureBoxMonorail = new System.Windows.Forms.PictureBox();
+            this.buttonCreateMonorail = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMonorail)).BeginInit();
             this.SuspendLayout();
             // 
-            // buttonCreate
+            // buttonCreateTrain
             // 
-            this.buttonCreate.Location = new System.Drawing.Point(12, 12);
-            this.buttonCreate.Name = "buttonCreate";
-            this.buttonCreate.Size = new System.Drawing.Size(75, 23);
-            this.buttonCreate.TabIndex = 1;
-            this.buttonCreate.Text = "Create";
-            this.buttonCreate.UseVisualStyleBackColor = true;
-            this.buttonCreate.Click += new System.EventHandler(this.buttonCreate_Click);
+            this.buttonCreateTrain.Location = new System.Drawing.Point(21, 12);
+            this.buttonCreateTrain.Name = "buttonCreateTrain";
+            this.buttonCreateTrain.Size = new System.Drawing.Size(105, 23);
+            this.buttonCreateTrain.TabIndex = 1;
+            this.buttonCreateTrain.Text = "Create Train";
+            this.buttonCreateTrain.UseVisualStyleBackColor = true;
+            this.buttonCreateTrain.Click += new System.EventHandler(this.buttonCreate_Click);
             // 
             // buttonLeft
             // 
@@ -104,16 +105,27 @@
             this.pictureBoxMonorail.TabIndex = 0;
             this.pictureBoxMonorail.TabStop = false;
             // 
+            // buttonCreateMonorail
+            // 
+            this.buttonCreateMonorail.Location = new System.Drawing.Point(147, 12);
+            this.buttonCreateMonorail.Name = "buttonCreateMonorail";
+            this.buttonCreateMonorail.Size = new System.Drawing.Size(105, 23);
+            this.buttonCreateMonorail.TabIndex = 6;
+            this.buttonCreateMonorail.Text = "Create Monorail";
+            this.buttonCreateMonorail.UseVisualStyleBackColor = true;
+            this.buttonCreateMonorail.Click += new System.EventHandler(this.buttonCreateMonorail_Click);
+            // 
             // FormMonorail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1184, 661);
+            this.Controls.Add(this.buttonCreateMonorail);
             this.Controls.Add(this.buttonLeft);
             this.Controls.Add(this.buttonDown);
             this.Controls.Add(this.buttonRight);
             this.Controls.Add(this.buttonUp);
-            this.Controls.Add(this.buttonCreate);
+            this.Controls.Add(this.buttonCreateTrain);
             this.Controls.Add(this.pictureBoxMonorail);
             this.Name = "FormMonorail";
             this.Text = "FormMonorail";
@@ -125,11 +137,12 @@
         #endregion
 
         private System.Windows.Forms.PictureBox pictureBoxMonorail;
-        private System.Windows.Forms.Button buttonCreate;
+        private System.Windows.Forms.Button buttonCreateTrain;
         private System.Windows.Forms.Button buttonUp;
         private System.Windows.Forms.Button buttonRight;
         private System.Windows.Forms.Button buttonDown;
         private System.Windows.Forms.Button buttonLeft;
+        private System.Windows.Forms.Button buttonCreateMonorail;
     }
 }
 
