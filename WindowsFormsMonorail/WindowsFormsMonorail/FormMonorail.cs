@@ -19,11 +19,19 @@ namespace WindowsFormsMonorail
 			InitializeComponent();
 		}
 
+		public void SetMonorail(ITransport monorail)
+		{
+			Random rnd = new Random();
+			this.monorail = monorail;
+			monorail.SetPosition(rnd.Next(50, 100), rnd.Next(50, 100), pictureBoxMonorail.Width, pictureBoxMonorail.Height);
+			Draw();
+		}
+
 		private void Draw()
 		{
 			Bitmap bmp = new Bitmap(pictureBoxMonorail.Width, pictureBoxMonorail.Height);
 			Graphics gr = Graphics.FromImage(bmp);
-			monorail.DrawTransport(gr);
+			monorail?.DrawTransport(gr);
 			pictureBoxMonorail.Image = bmp;
 		}
 
@@ -31,8 +39,7 @@ namespace WindowsFormsMonorail
 		{
 			Random rnd = new Random();
 			monorail = new Train(rnd.Next(150, 300), rnd.Next(1500, 2000), Color.White);
-			monorail.SetPosition(rnd.Next(50, 100), rnd.Next(50, 100), pictureBoxMonorail.Width,
-		   pictureBoxMonorail.Height);
+			monorail.SetPosition(rnd.Next(50, 100), rnd.Next(50, 100), pictureBoxMonorail.Width, pictureBoxMonorail.Height);
 			Draw();
 		}
 
@@ -55,16 +62,16 @@ namespace WindowsFormsMonorail
 				switch (name)
 				{
 					case "buttonUp":
-						monorail.MoveTransport(Direction.Up);
+						monorail?.MoveTransport(Direction.Up);
 						break;
 					case "buttonDown":
-						monorail.MoveTransport(Direction.Down);
+						monorail?.MoveTransport(Direction.Down);
 						break;
 					case "buttonLeft":
-						monorail.MoveTransport(Direction.Left);
+						monorail?.MoveTransport(Direction.Left);
 						break;
 					case "buttonRight":
-						monorail.MoveTransport(Direction.Right);
+						monorail?.MoveTransport(Direction.Right);
 						break;
 				}
 			}
