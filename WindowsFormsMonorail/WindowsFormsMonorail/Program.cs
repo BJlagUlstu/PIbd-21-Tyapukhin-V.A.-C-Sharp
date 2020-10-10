@@ -16,7 +16,7 @@ namespace WindowsFormsMonorail
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FormMonorail());
+            Application.Run(new FormDepot());
         }
     }
 }
