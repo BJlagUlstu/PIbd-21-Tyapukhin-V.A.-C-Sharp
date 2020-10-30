@@ -77,47 +77,17 @@ namespace WindowsFormsMonorail
             }
         }
 
-        private void buttonSetTrain_Click(object sender, EventArgs e)
+        private void AddTrain(Vehicle train)
         {
-            if (listBoxDepot.SelectedIndex > -1)
+            if (train != null && listBoxDepot.SelectedIndex > -1)
             {
-                ColorDialog dialog = new ColorDialog();
-                if (dialog.ShowDialog() == DialogResult.OK)
+                if ((depotCollection[listBoxDepot.SelectedItem.ToString()]) + train)
                 {
-                    var train = new Train(200, 1750, dialog.Color);
-                    if (depotCollection[listBoxDepot.SelectedItem.ToString()] + train)
-                    {
-                        Draw();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Парковка переполнена");
-                    }
+                    Draw();
                 }
-
-            }
-        }
-
-        private void buttonSetMonorail_Click(object sender, EventArgs e)
-        {
-            if (listBoxDepot.SelectedIndex > -1)
-            {
-                ColorDialog dialog = new ColorDialog();
-                if (dialog.ShowDialog() == DialogResult.OK)
+                else
                 {
-                    ColorDialog dialogDop = new ColorDialog();
-                    if (dialogDop.ShowDialog() == DialogResult.OK)
-                    {
-                        var train = new Monorail(200, 1750, dialog.Color, dialogDop.Color, true, true, true);
-                        if (depotCollection[listBoxDepot.SelectedItem.ToString()] + train)
-                        {
-                            Draw();
-                        }
-                        else
-                        {
-                            MessageBox.Show("Парковка переполнена");
-                        }
-                    }
+                    MessageBox.Show("Поезд не удалось поставить");
                 }
             }
         }
@@ -140,6 +110,13 @@ namespace WindowsFormsMonorail
         private void listBoxDepot_SelectedIndexChanged(object sender, EventArgs e)
         {
             Draw();
+        }
+
+        private void buttonSetTransport_Click(object sender, EventArgs e)
+        {
+            var formTrainConfig = new FormTrainConfig();
+            formTrainConfig.AddEvent(AddTrain);
+            formTrainConfig.Show();
         }
     }
 }

@@ -6,6 +6,9 @@ using System.Windows.Forms;
 
 namespace WindowsFormsMonorail
 {
+
+    public delegate void Action<Vehicle>(Vehicle train);
+
     static class Program
     {
         /// <summary>
