@@ -64,5 +64,10 @@ namespace WindowsFormsMonorail
                 g.DrawLine(pen, _startPosX + 50, _startPosY + 32, _startPosX + 200, _startPosY + 32);
             }
         }
+
+        public void SetDopColor(Color color)
+        {
+            DopColor = color;
+        }
     }
 }

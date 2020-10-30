@@ -31,6 +31,11 @@ namespace WindowsFormsMonorail
             _pictureHeight = height;
         }
 
+        public void SetMainColor(Color color)
+        {
+            MainColor = color;
+        }
+
         public abstract void MoveTransport(Direction direction);
 
         public abstract void DrawTransport(Graphics g);
