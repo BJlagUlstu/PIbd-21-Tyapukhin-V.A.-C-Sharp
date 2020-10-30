@@ -29,16 +29,17 @@
         private void InitializeComponent()
         {
             this.pictureBoxDepot = new System.Windows.Forms.PictureBox();
+            this.buttonParkTrain = new System.Windows.Forms.Button();
+            this.buttonParkMonorail = new System.Windows.Forms.Button();
             this.Place = new System.Windows.Forms.Label();
             this.maskedTextBoxTrain = new System.Windows.Forms.MaskedTextBox();
             this.groupBoxTrain = new System.Windows.Forms.GroupBox();
             this.buttonPickUp = new System.Windows.Forms.Button();
             this.listBoxDepot = new System.Windows.Forms.ListBox();
+            this.buttonDeleteDepot = new System.Windows.Forms.Button();
             this.buttonAddDepot = new System.Windows.Forms.Button();
             this.textBoxNewLevelName = new System.Windows.Forms.TextBox();
             this.Depot = new System.Windows.Forms.Label();
-            this.buttonDeleteDepot = new System.Windows.Forms.Button();
-            this.buttonAddTransport = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxDepot)).BeginInit();
             this.groupBoxTrain.SuspendLayout();
             this.SuspendLayout();
@@ -51,6 +52,26 @@
             this.pictureBoxDepot.Size = new System.Drawing.Size(1184, 661);
             this.pictureBoxDepot.TabIndex = 0;
             this.pictureBoxDepot.TabStop = false;
+            // 
+            // buttonParkTrain
+            // 
+            this.buttonParkTrain.Location = new System.Drawing.Point(1051, 304);
+            this.buttonParkTrain.Name = "buttonParkTrain";
+            this.buttonParkTrain.Size = new System.Drawing.Size(121, 23);
+            this.buttonParkTrain.TabIndex = 1;
+            this.buttonParkTrain.Text = "Park the Train";
+            this.buttonParkTrain.UseVisualStyleBackColor = true;
+            this.buttonParkTrain.Click += new System.EventHandler(this.buttonSetTrain_Click);
+            // 
+            // buttonParkMonorail
+            // 
+            this.buttonParkMonorail.Location = new System.Drawing.Point(1051, 346);
+            this.buttonParkMonorail.Name = "buttonParkMonorail";
+            this.buttonParkMonorail.Size = new System.Drawing.Size(121, 23);
+            this.buttonParkMonorail.TabIndex = 2;
+            this.buttonParkMonorail.Text = "Park the Monorail";
+            this.buttonParkMonorail.UseVisualStyleBackColor = true;
+            this.buttonParkMonorail.Click += new System.EventHandler(this.buttonSetMonorail_Click);
             // 
             // Place
             // 
@@ -99,6 +120,16 @@
             this.listBoxDepot.TabIndex = 6;
             this.listBoxDepot.Click += new System.EventHandler(this.listBoxDepot_SelectedIndexChanged);
             // 
+            // buttonDeleteDepot
+            // 
+            this.buttonDeleteDepot.Location = new System.Drawing.Point(1051, 258);
+            this.buttonDeleteDepot.Name = "buttonDeleteDepot";
+            this.buttonDeleteDepot.Size = new System.Drawing.Size(121, 23);
+            this.buttonDeleteDepot.TabIndex = 7;
+            this.buttonDeleteDepot.Text = "Delete Depot";
+            this.buttonDeleteDepot.UseVisualStyleBackColor = true;
+            this.buttonDeleteDepot.Click += new System.EventHandler(this.buttonDelDepot_Click);
+            // 
             // buttonAddDepot
             // 
             this.buttonAddDepot.Location = new System.Drawing.Point(1051, 95);
@@ -125,38 +156,19 @@
             this.Depot.TabIndex = 10;
             this.Depot.Text = "Depot:";
             // 
-            // buttonDeleteDepot
-            // 
-            this.buttonDeleteDepot.Location = new System.Drawing.Point(1051, 258);
-            this.buttonDeleteDepot.Name = "buttonDeleteDepot";
-            this.buttonDeleteDepot.Size = new System.Drawing.Size(121, 23);
-            this.buttonDeleteDepot.TabIndex = 7;
-            this.buttonDeleteDepot.Text = "Delete Depot";
-            this.buttonDeleteDepot.UseVisualStyleBackColor = true;
-            this.buttonDeleteDepot.Click += new System.EventHandler(this.buttonDelDepot_Click);
-            // 
-            // buttonAddTransport
-            // 
-            this.buttonAddTransport.Location = new System.Drawing.Point(1051, 325);
-            this.buttonAddTransport.Name = "buttonAddTransport";
-            this.buttonAddTransport.Size = new System.Drawing.Size(121, 23);
-            this.buttonAddTransport.TabIndex = 11;
-            this.buttonAddTransport.Text = "Add transport";
-            this.buttonAddTransport.UseVisualStyleBackColor = true;
-            this.buttonAddTransport.Click += new System.EventHandler(this.buttonSetTransport_Click);
-            // 
             // FormDepot
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1184, 661);
-            this.Controls.Add(this.buttonAddTransport);
             this.Controls.Add(this.Depot);
             this.Controls.Add(this.textBoxNewLevelName);
             this.Controls.Add(this.buttonAddDepot);
             this.Controls.Add(this.buttonDeleteDepot);
             this.Controls.Add(this.listBoxDepot);
             this.Controls.Add(this.groupBoxTrain);
+            this.Controls.Add(this.buttonParkMonorail);
+            this.Controls.Add(this.buttonParkTrain);
             this.Controls.Add(this.pictureBoxDepot);
             this.Name = "FormDepot";
             this.Text = "FormDepot";
@@ -171,15 +183,16 @@
         #endregion
 
         private System.Windows.Forms.PictureBox pictureBoxDepot;
+        private System.Windows.Forms.Button buttonParkTrain;
+        private System.Windows.Forms.Button buttonParkMonorail;
         private System.Windows.Forms.Label Place;
         private System.Windows.Forms.MaskedTextBox maskedTextBoxTrain;
         private System.Windows.Forms.GroupBox groupBoxTrain;
         private System.Windows.Forms.Button buttonPickUp;
         private System.Windows.Forms.ListBox listBoxDepot;
+        private System.Windows.Forms.Button buttonDeleteDepot;
         private System.Windows.Forms.Button buttonAddDepot;
         private System.Windows.Forms.TextBox textBoxNewLevelName;
         private System.Windows.Forms.Label Depot;
-        private System.Windows.Forms.Button buttonDeleteDepot;
-        private System.Windows.Forms.Button buttonAddTransport;
     }
 }
