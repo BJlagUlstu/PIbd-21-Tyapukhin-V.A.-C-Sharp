@@ -29,6 +29,23 @@ namespace WindowsFormsMonorail
             Bottom_monorail = bottom_monorail;
         }
 
+        public Monorail(string info) : base(info)
+        {
+            string[] strs = info.Split(separator);
+            if (strs.Length == 7)
+            {
+                MaxSpeed = Convert.ToInt32(strs[0]);
+                Weight = Convert.ToInt32(strs[1]);
+                string[] MaincolorRGB = strs[2].Split(',');
+                MainColor = Color.FromArgb(255, Convert.ToInt32(MaincolorRGB[0]), Convert.ToInt32(MaincolorRGB[1]), Convert.ToInt32(MaincolorRGB[2]));
+                string[] DopcolorRGB = strs[3].Split(',');
+                DopColor = Color.FromArgb(255, Convert.ToInt32(DopcolorRGB[0]), Convert.ToInt32(DopcolorRGB[1]), Convert.ToInt32(DopcolorRGB[2]));
+                SportLine = Convert.ToBoolean(strs[4]);
+                Headlights = Convert.ToBoolean(strs[5]);
+                Bottom_monorail = Convert.ToBoolean(strs[6]);
+            }
+        }
+
         public override void DrawTransport(Graphics g)
         {
             Pen pen = new Pen(Color.Black);
@@ -68,6 +85,11 @@ namespace WindowsFormsMonorail
         public void SetDopColor(Color color)
         {
             DopColor = color;
+        }
+
+        public override string ToString()
+        {
+            return $"{base.ToString()}{separator}{DopColor.R},{DopColor.G},{DopColor.B}{separator}{SportLine}{separator}{Headlights}{separator}{Bottom_monorail}";
         }
     }
 }

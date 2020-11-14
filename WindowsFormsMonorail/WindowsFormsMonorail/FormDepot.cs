@@ -118,5 +118,41 @@ namespace WindowsFormsMonorail
             formTrainConfig.AddEvent(AddTrain);
             formTrainConfig.Show();
         }
+
+        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                if (depotCollection.SaveData(saveFileDialog.FileName))
+                {
+                    MessageBox.Show("Сохранение успешно завершено", "Результат",
+                   MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("Не сохранилось", "Результат",
+                   MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void uploadToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                if (depotCollection.LoadData(openFileDialog.FileName))
+                {
+                    MessageBox.Show("Загрузка успешно завершена", "Результат", MessageBoxButtons.OK,
+                   MessageBoxIcon.Information);
+                    ReloadLevels();
+                    Draw();
+                }
+                else
+                {
+                    MessageBox.Show("Не загрузили", "Результат", MessageBoxButtons.OK,
+                   MessageBoxIcon.Error);
+                }
+            }
+        }
     }
 }
