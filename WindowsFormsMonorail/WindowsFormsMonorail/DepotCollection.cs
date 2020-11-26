@@ -60,6 +60,11 @@ namespace WindowsFormsMonorail
 
         public bool SaveData(string filename)
         {
+            if (File.Exists(filename))
+            {
+                File.Delete(filename);
+            }
+
             using (StreamWriter sw = new StreamWriter(filename, false))
             {
                 sw.WriteLine($"DepotCollection", sw);
