@@ -39,16 +39,23 @@
             this.Depot = new System.Windows.Forms.Label();
             this.buttonDeleteDepot = new System.Windows.Forms.Button();
             this.buttonAddTransport = new System.Windows.Forms.Button();
+            this.menuStrip = new System.Windows.Forms.MenuStrip();
+            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.uploadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxDepot)).BeginInit();
             this.groupBoxTrain.SuspendLayout();
+            this.menuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // pictureBoxDepot
             // 
             this.pictureBoxDepot.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBoxDepot.Location = new System.Drawing.Point(0, 0);
+            this.pictureBoxDepot.Location = new System.Drawing.Point(0, 24);
             this.pictureBoxDepot.Name = "pictureBoxDepot";
-            this.pictureBoxDepot.Size = new System.Drawing.Size(1184, 661);
+            this.pictureBoxDepot.Size = new System.Drawing.Size(1184, 637);
             this.pictureBoxDepot.TabIndex = 0;
             this.pictureBoxDepot.TabStop = false;
             // 
@@ -145,6 +152,49 @@
             this.buttonAddTransport.UseVisualStyleBackColor = true;
             this.buttonAddTransport.Click += new System.EventHandler(this.buttonSetTransport_Click);
             // 
+            // menuStrip
+            // 
+            this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fileToolStripMenuItem});
+            this.menuStrip.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip.Name = "menuStrip";
+            this.menuStrip.Size = new System.Drawing.Size(1184, 24);
+            this.menuStrip.TabIndex = 12;
+            this.menuStrip.Text = "menuStrip";
+            // 
+            // fileToolStripMenuItem
+            // 
+            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.saveToolStripMenuItem,
+            this.uploadToolStripMenuItem});
+            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.fileToolStripMenuItem.Text = "File";
+            // 
+            // saveToolStripMenuItem
+            // 
+            this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.saveToolStripMenuItem.Text = "Save";
+            this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
+            // 
+            // uploadToolStripMenuItem
+            // 
+            this.uploadToolStripMenuItem.Name = "uploadToolStripMenuItem";
+            this.uploadToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.uploadToolStripMenuItem.Text = "Upload";
+            this.uploadToolStripMenuItem.Click += new System.EventHandler(this.uploadToolStripMenuItem_Click);
+            // 
+            // openFileDialog
+            // 
+            this.openFileDialog.FileName = "openFileDialog";
+            this.openFileDialog.Filter = "txt file | *.txt";
+            // 
+            // saveFileDialog
+            // 
+            this.saveFileDialog.FileName = "saveFileDialog";
+            this.saveFileDialog.Filter = "txt file | *.txt";
+            // 
             // FormDepot
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -158,11 +208,15 @@
             this.Controls.Add(this.listBoxDepot);
             this.Controls.Add(this.groupBoxTrain);
             this.Controls.Add(this.pictureBoxDepot);
+            this.Controls.Add(this.menuStrip);
+            this.MainMenuStrip = this.menuStrip;
             this.Name = "FormDepot";
             this.Text = "FormDepot";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxDepot)).EndInit();
             this.groupBoxTrain.ResumeLayout(false);
             this.groupBoxTrain.PerformLayout();
+            this.menuStrip.ResumeLayout(false);
+            this.menuStrip.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -181,5 +235,11 @@
         private System.Windows.Forms.Label Depot;
         private System.Windows.Forms.Button buttonDeleteDepot;
         private System.Windows.Forms.Button buttonAddTransport;
+        private System.Windows.Forms.MenuStrip menuStrip;
+        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem uploadToolStripMenuItem;
+        private System.Windows.Forms.OpenFileDialog openFileDialog;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog;
     }
 }

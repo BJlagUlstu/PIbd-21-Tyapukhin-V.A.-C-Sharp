@@ -15,11 +15,25 @@ namespace WindowsFormsMonorail
 
         protected readonly int monorailWidthMagnet = 20;
 
+        protected readonly char separator = ';';
+
         public Train(int maxSpeed, float weight, Color mainColor)
         {
             MaxSpeed = maxSpeed;
             Weight = weight;
             MainColor = mainColor;
+        }
+
+        public Train(string info)
+        {
+            string[] strs = info.Split(separator);
+            if (strs.Length == 3)
+            {
+                MaxSpeed = Convert.ToInt32(strs[0]);
+                Weight = Convert.ToInt32(strs[1]);
+                string[] MaincolorRGB = strs[2].Split(',');
+                MainColor = Color.FromArgb(255, Convert.ToInt32(MaincolorRGB[0]), Convert.ToInt32(MaincolorRGB[1]), Convert.ToInt32(MaincolorRGB[2]));
+            }
         }
 
         protected Train(int maxSpeed, float weight, Color mainColor, int monoWidth, int monoHeight)
@@ -120,6 +134,11 @@ namespace WindowsFormsMonorail
             g.FillRectangle(brBlack, _startPosX + 102, _startPosY + 25, 12, 12);
             g.FillRectangle(brBlack, _startPosX + 138, _startPosY + 25, 12, 12);
             g.FillRectangle(brBlack, _startPosX + 152, _startPosY + 25, 12, 12);
+        }
+
+        public override string ToString()
+        {
+            return $"{MaxSpeed}{separator}{Weight}{separator}{MainColor.R},{MainColor.G},{MainColor.B}";
         }
     }
 }
