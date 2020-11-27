@@ -34,7 +34,7 @@ namespace WindowsFormsMonorail
         public static bool operator +(Depot<T> p, T train)
         {
             if (p._places.Count >= p._maxCount)
-                return false;
+                throw new DepotOverflowException();
 
             p._places.Add(train);
             return true;
@@ -43,7 +43,7 @@ namespace WindowsFormsMonorail
         public static T operator -(Depot<T> p, int index)
         {
             if (index < 0 || index >= p._places.Count)
-                return null;
+                throw new DepotNotFoundException(index);
 
             T train = p._places[index];
             p._places.RemoveAt(index);

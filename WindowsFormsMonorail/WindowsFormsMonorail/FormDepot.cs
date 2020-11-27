@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using NLog;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -15,10 +16,13 @@ namespace WindowsFormsMonorail
 
         private readonly DepotCollection depotCollection;
 
+        private readonly Logger logger;
+
         public FormDepot()
         {
             InitializeComponent();
             depotCollection = new DepotCollection(pictureBoxDepot.Width, pictureBoxDepot.Height);
+            logger = LogManager.GetCurrentClassLogger();
         }
 
         private void ReloadLevels()
@@ -56,10 +60,12 @@ namespace WindowsFormsMonorail
         {
             if (string.IsNullOrEmpty(textBoxNewLevelName.Text))
             {
-                MessageBox.Show("Введите название парковки", "Ошибка",
+                logger.Warn("При добавлении депо отсутствовало название");
+                MessageBox.Show("Введите название депо", "Ошибка",
                MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+            logger.Info($"Добавили депо {textBoxNewLevelName.Text}");
             depotCollection.AddDepot(textBoxNewLevelName.Text);
             ReloadLevels();
         }
@@ -68,8 +74,9 @@ namespace WindowsFormsMonorail
         {
             if (listBoxDepot.SelectedIndex > -1)
             {
-                if (MessageBox.Show($"Удалить парковку {listBoxDepot.SelectedItem.ToString()}?", "Удаление", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                if (MessageBox.Show($"Удалить депо {listBoxDepot.SelectedItem.ToString()}?", "Удаление", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
+                    logger.Info($"Удалили депо {listBoxDepot.SelectedItem.ToString()}");
                     depotCollection.DelDepot(listBoxDepot.SelectedItem.ToString());
                     ReloadLevels();
                     Draw();
@@ -81,13 +88,28 @@ namespace WindowsFormsMonorail
         {
             if (train != null && listBoxDepot.SelectedIndex > -1)
             {
-                if ((depotCollection[listBoxDepot.SelectedItem.ToString()]) + train)
+                try
                 {
-                    Draw();
+                    if ((depotCollection[listBoxDepot.SelectedItem.ToString()]) + train)
+                    {
+                        Draw();
+                        logger.Info($"Добавлен поезд {train}");
+                    }
+                    else
+                    {
+                        logger.Warn("Поезд не удалось добавить в депо");
+                        MessageBox.Show("Поезд не удалось поставить");
+                    }
                 }
-                else
+                catch (DepotOverflowException ex)
                 {
-                    MessageBox.Show("Поезд не удалось поставить");
+                    logger.Warn("Произошло переполнение депо");
+                    MessageBox.Show(ex.Message, "Переполнение", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                catch (Exception ex)
+                {
+                    logger.Warn("Возникла неизвестная ошибка");
+                    MessageBox.Show(ex.Message, "Неизвестная ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
@@ -96,19 +118,34 @@ namespace WindowsFormsMonorail
         {
             if (listBoxDepot.SelectedIndex > -1 && maskedTextBoxTrain.Text != "")
             {
-                var train = depotCollection[listBoxDepot.SelectedItem.ToString()] - Convert.ToInt32(maskedTextBoxTrain.Text);
-                if (train != null)
+                try
                 {
-                    FormMonorail form = new FormMonorail();
-                    form.SetMonorail(train);
-                    form.ShowDialog();
+                    var train = depotCollection[listBoxDepot.SelectedItem.ToString()] - Convert.ToInt32(maskedTextBoxTrain.Text);
+                    if (train != null)
+                    {
+                        FormMonorail form = new FormMonorail();
+                        form.SetMonorail(train);
+                        form.ShowDialog();
+                        logger.Info($"Изъят поезд {train} с места {maskedTextBoxTrain.Text}");
+                        Draw();
+                    }
                 }
-                Draw();
+                catch (DepotNotFoundException ex)
+                {
+                    logger.Warn($"Поезд по месту {maskedTextBoxTrain.Text} не найден");
+                    MessageBox.Show(ex.Message, "Не найдено", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                catch (Exception ex)
+                {
+                    logger.Warn("Возникла неизвестная ошибка");
+                    MessageBox.Show(ex.Message, "Неизвестная ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
 
         private void listBoxDepot_SelectedIndexChanged(object sender, EventArgs e)
         {
+            logger.Info($"Перешли в депо {listBoxDepot.SelectedItem.ToString()}");
             Draw();
         }
 
@@ -123,15 +160,18 @@ namespace WindowsFormsMonorail
         {
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
-                if (depotCollection.SaveData(saveFileDialog.FileName))
+                try
                 {
+                    depotCollection.SaveData(saveFileDialog.FileName);
                     MessageBox.Show("Сохранение успешно завершено", "Результат",
                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    logger.Info("Сохранено в файл " + saveFileDialog.FileName);
                 }
-                else
+                catch (Exception ex)
                 {
-                    MessageBox.Show("Не сохранилось", "Результат",
+                    MessageBox.Show(ex.Message, "Неизвестная ошибка при сохранении",
                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    logger.Warn("Возникла неизвестная ошибка при сохранении");
                 }
             }
         }
@@ -140,17 +180,26 @@ namespace WindowsFormsMonorail
         {
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                if (depotCollection.LoadData(openFileDialog.FileName))
+                try
                 {
+                    depotCollection.LoadData(openFileDialog.FileName);
                     MessageBox.Show("Загрузка успешно завершена", "Результат", MessageBoxButtons.OK,
                    MessageBoxIcon.Information);
+                    logger.Info("Загружено из файла " + openFileDialog.FileName);
                     ReloadLevels();
                     Draw();
                 }
-                else
+                catch (DepotOccupiedPlaceException ex)
                 {
-                    MessageBox.Show("Не загрузили", "Результат", MessageBoxButtons.OK,
+                    MessageBox.Show(ex.Message, "Занятое место", MessageBoxButtons.OK,
                    MessageBoxIcon.Error);
+                    logger.Warn("Не удалось загрузить поезд в депо");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Неизвестная ошибка при загрузке",
+                   MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    logger.Warn("Возникла неизвестная ошибка при загрузке");
                 }
             }
         }

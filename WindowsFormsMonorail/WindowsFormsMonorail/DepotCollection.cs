@@ -58,7 +58,7 @@ namespace WindowsFormsMonorail
             }
         }
 
-        public bool SaveData(string filename)
+        public void SaveData(string filename)
         {
             if (File.Exists(filename))
             {
@@ -91,14 +91,13 @@ namespace WindowsFormsMonorail
                     }
                 }
             }
-            return true;
         }
 
-        public bool LoadData(string filename)
+        public void LoadData(string filename)
         {
             if (!File.Exists(filename))
             {
-                return false;
+                throw new FileNotFoundException();
             }
 
             using (StreamReader sr = new StreamReader(filename))
@@ -112,7 +111,7 @@ namespace WindowsFormsMonorail
                     }
                     else
                     {
-                        return false;
+                        throw new FileFormatException();
                     }
 
                     Vehicle train = null;
@@ -144,11 +143,10 @@ namespace WindowsFormsMonorail
                         var result = depotStages[key] + train;
                         if (!result)
                         {
-                            return false;
+                            throw new DepotOccupiedPlaceException();
                         }
                     }
                 }
-                return true;
             }
         }
     }
