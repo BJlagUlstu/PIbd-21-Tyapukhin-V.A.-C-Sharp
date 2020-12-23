@@ -7,7 +7,7 @@ using System.Drawing;
 
 namespace WindowsFormsMonorail
 {
-    class Monorail : Train
+    class Monorail : Train, IEquatable<Monorail>
     {
         public Color DopColor { private set; get; }
 
@@ -18,7 +18,6 @@ namespace WindowsFormsMonorail
         public bool Bottom_monorail { private set; get; }
 
         public Monorail(int maxSpeed, float weight, Color mainColor, Color dopColor, bool sportLine, bool headlights, bool bottom_monorail) : base(maxSpeed, weight, mainColor, 270, 70)
-
         {
             MaxSpeed = maxSpeed;
             Weight = weight;
@@ -90,6 +89,63 @@ namespace WindowsFormsMonorail
         public override string ToString()
         {
             return $"{base.ToString()}{separator}{DopColor.R},{DopColor.G},{DopColor.B}{separator}{SportLine}{separator}{Headlights}{separator}{Bottom_monorail}";
+        }
+
+        public bool Equals(Monorail other)
+        {
+            if (other == null)
+            {
+                return false;
+            }
+            if (GetType().Name != other.GetType().Name)
+            {
+                return false;
+            }
+            if (MaxSpeed != other.MaxSpeed)
+            {
+                return false;
+            }
+            if (Weight != other.Weight)
+            {
+                return false;
+            }
+            if (MainColor != other.MainColor)
+            {
+                return false;
+            }
+            if (DopColor != other.DopColor)
+            {
+                return false;
+            }
+            if (SportLine != other.SportLine)
+            {
+                return false;
+            }
+            if (Headlights != other.Headlights)
+            {
+                return false;
+            }
+            if (Bottom_monorail != other.Bottom_monorail)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public override bool Equals(Object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+            if (!(obj is Monorail trainObj))
+            {
+                return false;
+            }
+            else
+            {
+                return Equals(trainObj);
+            }
         }
     }
 }

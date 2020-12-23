@@ -20,3 +20,12 @@
 2020-11-27 22:37:26.1294|INFO|WindowsFormsMonorail.FormDepot|Добавлен поезд 100;100;255,255,255
 2020-11-27 22:37:36.0589|WARN|WindowsFormsMonorail.FormDepot|Произошло переполнение депо
 2020-11-27 22:37:48.3339|WARN|WindowsFormsMonorail.FormDepot|Поезд по месту 20 не найден
+2020-12-23 20:37:56.5119|INFO|WindowsFormsMonorail.FormDepot|Добавили депо 1
+2020-12-23 20:37:57.5162|INFO|WindowsFormsMonorail.FormDepot|Перешли в депо 1
+2020-12-23 20:38:02.6484|INFO|WindowsFormsMonorail.FormDepot|Добавлен поезд 100;100;255,255,255
+2020-12-23 20:38:09.2832|INFO|WindowsFormsMonorail.FormDepot|Добавлен поезд 100;100;255,255,255;0,0,0;False;True;False
+2020-12-23 20:38:12.2067|INFO|WindowsFormsMonorail.FormDepot|Добавлен поезд 100;100;255,255,255;0,0,0;False;False;False
+2020-12-23 20:38:17.4146|INFO|WindowsFormsMonorail.FormDepot|Добавлен поезд 100;100;255,0,0
+2020-12-23 20:38:21.3904|INFO|WindowsFormsMonorail.FormDepot|Добавлен поезд 100;100;255,255,0
+2020-12-23 20:38:25.7579|INFO|WindowsFormsMonorail.FormDepot|Добавлен поезд 100;100;255,0,0;0,0,0;False;False;False
+2020-12-23 20:38:27.7278|INFO|WindowsFormsMonorail.FormDepot|Сортировка уровней

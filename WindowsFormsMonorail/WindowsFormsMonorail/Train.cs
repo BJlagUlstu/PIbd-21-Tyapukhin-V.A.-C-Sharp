@@ -7,7 +7,7 @@ using System.Drawing;
 
 namespace WindowsFormsMonorail
 {
-    class Train : Vehicle
+    class Train : Vehicle, IEquatable<Train>
     {
         protected readonly int monorailWidth = 260;
 
@@ -139,6 +139,47 @@ namespace WindowsFormsMonorail
         public override string ToString()
         {
             return $"{MaxSpeed}{separator}{Weight}{separator}{MainColor.R},{MainColor.G},{MainColor.B}";
+        }
+
+        public bool Equals(Train other)
+        {
+            if (other == null)
+            {
+                return false;
+            }
+            if (GetType().Name != other.GetType().Name)
+            {
+                return false;
+            }
+            if (MaxSpeed != other.MaxSpeed)
+            {
+                return false;
+            }
+            if (Weight != other.Weight)
+            {
+                return false;
+            }
+            if (MainColor != other.MainColor)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public override bool Equals(Object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+            if (!(obj is Train trainObj))
+            {
+                return false;
+            }
+            else
+            {
+                return Equals(trainObj);
+            }
         }
     }
 }
