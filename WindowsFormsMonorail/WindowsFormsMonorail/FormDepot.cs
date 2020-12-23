@@ -106,6 +106,11 @@ namespace WindowsFormsMonorail
                     logger.Warn("Произошло переполнение депо");
                     MessageBox.Show(ex.Message, "Переполнение", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
+                catch (DepotAlreadyHaveException ex)
+                {
+                    logger.Warn("Попытка дублирования поезда");
+                    MessageBox.Show(ex.Message, "Дублирование", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
                 catch (Exception ex)
                 {
                     logger.Warn("Возникла неизвестная ошибка");
@@ -201,6 +206,16 @@ namespace WindowsFormsMonorail
                    MessageBoxButtons.OK, MessageBoxIcon.Error);
                     logger.Warn("Возникла неизвестная ошибка при загрузке");
                 }
+            }
+        }
+
+        private void buttonSort_Click(object sender, EventArgs e)
+        {
+            if (listBoxDepot.SelectedIndex > -1)
+            {
+                depotCollection[listBoxDepot.SelectedItem.ToString()].Sort();
+                Draw();
+                logger.Info("Сортировка уровней");
             }
         }
     }

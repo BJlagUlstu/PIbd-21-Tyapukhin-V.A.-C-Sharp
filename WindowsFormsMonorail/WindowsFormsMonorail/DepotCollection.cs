@@ -72,9 +72,7 @@ namespace WindowsFormsMonorail
                 {
                     sw.WriteLine($"Depot{separator}{level.Key}", sw);
 
-                    ITransport train;
-
-                    for (int i = 0; (train = level.Value.GetNext(i)) != null; i++)
+                    foreach (ITransport train in level.Value)
                     {
                         if (train != null)
                         {
